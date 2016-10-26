@@ -1,3 +1,4 @@
+var assert = require('assert');
 var Maybe = {
   // * -> Maybe a
   Nothing: function() {
@@ -6,6 +7,10 @@ var Maybe = {
   // a -> Maybe a
   Just: function(a) {
     return { isNothing: false, value: a };
+  },
+  // Maybe a -> Bool
+  isMaybe: function(maybe) {
+    return typeof maybe === 'object' && maybe.hasOwnProperty('isNothing');
   },
   // Maybe a -> Bool
   isNothing: function(maybe) {
@@ -21,6 +26,8 @@ var Maybe = {
   },
   // a -> Maybe a -> a
   fromMaybe: function(defaultValue, maybeValue) {
+    assert(Maybe.isMaybe(maybeValue));
+
     if (Maybe.isJust(maybeValue)) {
       return Maybe.getValueFromJust(maybeValue);
     } else {
@@ -29,6 +36,8 @@ var Maybe = {
   },
   // b -> (a -> b) -> Maybe a -> b
   maybe: function(defaultNothing, mapJust, maybeValue) {
+    assert(Maybe.isMaybe(maybeValue));
+
     if (Maybe.isJust(maybeValue)) {
       return mapJust(Maybe.getValueFromJust(maybeValue));
     } else {
@@ -45,12 +54,20 @@ var Maybe = {
   },
   // (a -> b) -> Maybe a -> Maybe b
   map: function(fn, maybeValue) {
+    assert(Maybe.isMaybe(maybeValue));
+
     if (Maybe.isJust(maybeValue)) {
       return Maybe.Just(fn(Maybe.getValueFromJust(maybeValue)));
     } else {
       return maybeValue;
     }
-  }
+  },
+  // (a -> Maybe b) -> Maybe a -> Maybe b
+  chain: function(fn, maybeValue) {
+    assert(Maybe.isMaybe(maybeValue));
+
+    return Maybe.maybe(Maybe.Nothing(), fn, maybeValue);
+  },
 };
 
 module.exports = Maybe;
