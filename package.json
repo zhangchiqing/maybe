@@ -1,0 +1,19 @@
+{
+  "name": "maybe",
+  "version": "1.0.0",
+  "description": "Maybe Pattern",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhangchiqing/maybe.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhangchiqing/maybe/issues"
+  },
+  "homepage": "https://github.com/zhangchiqing/maybe#readme"
+}
