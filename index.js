@@ -34,16 +34,6 @@ var Maybe = {
       return defaultValue;
     }
   },
-  // b -> (a -> b) -> Maybe a -> b
-  maybe: function(defaultNothing, mapJust, maybeValue) {
-    assert(Maybe.isMaybe(maybeValue));
-
-    if (Maybe.isJust(maybeValue)) {
-      return mapJust(Maybe.getValueFromJust(maybeValue));
-    } else {
-      return defaultNothing;
-    }
-  },
   // a? -> Maybe a
   toMaybe: function(nullable) {
     if (nullable === null || nullable === undefined) {
@@ -61,6 +51,12 @@ var Maybe = {
     } else {
       return maybeValue;
     }
+  },
+  // b -> (a -> b) -> Maybe a -> b
+  maybe: function(defaultNothing, mapJust, maybeValue) {
+    assert(Maybe.isMaybe(maybeValue));
+
+    return Maybe.fromMaybe(defaultNothing, Maybe.map(mapJust, maybeValue));
   },
   // (a -> Maybe b) -> Maybe a -> Maybe b
   chain: function(fn, maybeValue) {
