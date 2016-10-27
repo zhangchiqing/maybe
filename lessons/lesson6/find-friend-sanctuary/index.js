@@ -11,10 +11,10 @@ var R = require('ramda');
 // findBestFriendNameByUserId :: String -> Maybe String
 var findBestFriendNameByUserId = R.pipe(
   F.parseUserId, // -> Maybe UserId
-  R.curry(R.chain)(F.findBestFriendshipByUserId), // -> Maybe Friendship
-  R.curry(R.map)(F.selectFriendId), // -> Maybe UserId
-  R.curry(R.chain)(F.findUserById), // -> Maybe User
-  R.curry(R.map)(F.selectUserName) // -> Maybe String
+  R.chain(F.findBestFriendshipByUserId), // -> Maybe Friendship
+  R.map(F.selectFriendId), // -> Maybe UserId
+  R.chain(F.findUserById), // -> Maybe User
+  R.map(F.selectUserName) // -> Maybe String
 );
 
 assert.deepEqual(findBestFriendNameByUserId('1'), { isNothing: false, isJust: true, value: 'u2' });
