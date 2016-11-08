@@ -37,7 +37,7 @@ var findBestFriendNameByUserId = function(userIdStr) {
 };
 
 assert.deepEqual(findBestFriendNameByUserId('1'), 'u2');
-// assert.deepEqual(findBestFriendNameByUserId('sdf'), undefined);
+assert.deepEqual(findBestFriendNameByUserId('3'), undefined);
+assert.deepEqual(findBestFriendNameByUserId('sdf'), undefined);
 // assert.deepEqual(findBestFriendNameByUserId('10'), null);
-// assert.deepEqual(findBestFriendNameByUserId('3'), undefined);
 // assert.deepEqual(findBestFriendNameByUserId('-1'), null);

@@ -1,7 +1,6 @@
 var assert = require('assert');
 // String -> User
 var makeUser = function(name) {
-  assert.equal(typeof name, 'string');
   return { name: name };
 };
 
@@ -13,7 +12,6 @@ var isUser = function(user) {
 
 // selectUserName :: User -> String
 exports.selectUserName = function(user) {
-  assert(isUser(user));
   return user.name;
 };
 
@@ -31,7 +29,6 @@ var isFriendship = function(friendship) {
 
 // selectFriendId :: Friendship -> UserId
 exports.selectFriendId = function(friendship) {
-  assert(isFriendship(friendship));
   return friendship.friendId;
 };
 
